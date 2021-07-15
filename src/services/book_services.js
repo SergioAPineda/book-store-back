@@ -8,3 +8,5 @@ const newBook = async (title, category, author) => {
   })
   return await book.save()
 }
+
+module.exports = newBook;
