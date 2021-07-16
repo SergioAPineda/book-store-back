@@ -14,6 +14,17 @@ const getAllBooks = async () => {
   return books 
 }
 
+const getByCategory = async (param) => {
+  let book = await Book.find()
+  let newResult = book.filter(currentBook =>{
+    if(currentBook.category === param){
+      return currentBook
+    }
+  });
+  
+  return newResult; 
+}
 
 
-module.exports = {createBook, getAllBooks };
+
+module.exports = {createBook, getAllBooks, getByCategory };
