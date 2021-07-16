@@ -1,4 +1,4 @@
-const Book = require('../models/Book');
+const Book = require('../models/book');
 
 const createBook = async (body) => {
   let newBook = new Book({
