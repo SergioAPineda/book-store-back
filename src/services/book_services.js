@@ -1,12 +1,19 @@
-const Book = require('../models/book');
+const Book = require('../models/Book');
 
-const newBook = async (title, category, author) => {
+const createBook = async (body) => {
   let book = new Book({
-    title: title,
-    category: category,
-    author: author
+    title: body.title,
+    category: body.category,
+    author: body.author
   })
   return await book.save()
 }
 
-module.exports = newBook;
+const getAllBooks = async () => {
+  let books = await Book.find()
+  return books 
+}
+
+
+
+module.exports = {createBook, getAllBooks };

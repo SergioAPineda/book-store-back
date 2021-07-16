@@ -1,14 +1,18 @@
-const newBook = require('../services/book_services');
+const express = require('express');
+const {createBook, getAllBooks} = require('../services/book_services');
+const schema = require('../utils/data_validator')
 
-const createBook = (req, res) => {
+const route = express.Router();
+
+route.post('/', (req, res) => {
   let body = req.body;
   const {error, value} = schema.validate({ 
-    title :          body.title,
-    category:          body.category,
-    author:    body.author
+    title:     body.title,
+    category:  body.category,
+    author:    body.author,
   });
   if(!error){
-    let result = newBook(body.title, body.category, body.author);
+    let result = createBook(body);
 
     result.then( book => {
       res.json({
@@ -25,4 +29,19 @@ const createBook = (req, res) => {
     })
   }
 
-}
+})
+
+route.get("/all", (req, res) => {
+  let result = getAllBooks();
+  result.then(resultValue => {
+    res.json({
+      result: resultValue
+    })
+  }).catch(err => {
+    res.status(400).json({
+      error: err
+    })
+  });
+});
+
+module.exports = route;
