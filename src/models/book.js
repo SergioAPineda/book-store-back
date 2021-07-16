@@ -8,4 +8,6 @@ const bookSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Book', bookSchema);
+let Book = mongoose.model('Book', bookSchema);
+
+module.exports = Book;
