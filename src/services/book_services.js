@@ -1,12 +1,12 @@
 const Book = require('../models/Book');
 
 const createBook = async (body) => {
-  let book = new Book({
+  let newBook = new Book({
     title: body.title,
     category: body.category,
     author: body.author
   })
-  return await book.save()
+  return await newBook.save()
 }
 
 const getAllBooks = async () => {
@@ -15,8 +15,8 @@ const getAllBooks = async () => {
 }
 
 const getByCategory = async (param) => {
-  let book = await Book.find()
-  let newResult = book.filter(currentBook =>{
+  let listOfBook = await Book.find()
+  let newResult = listOfBook.filter(currentBook =>{
     if(currentBook.category === param){
       return currentBook
     }
